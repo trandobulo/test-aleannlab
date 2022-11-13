@@ -1,0 +1,25 @@
+1. SVG import
+2. Make TailWind Components to separate css frome code 
+3. Location / adress API
+4. Add "Posted" before time ago 
+5. types allover the code
+6. add multiply shadows
+
+
+get data [0,2,3,4, .... ,n];
+
+page 1 : 0-9;
+page 2 : 10-19;
+...
+
+page n: (n-1)*10-(n*10)-1
+
+renderTenItems = (items, page) => {
+    const ten = []
+    for (let i = ((page-1)*10),i < page*10, i++){
+        ten.push(items[i])
+    }
+
+    return items
+}
+
