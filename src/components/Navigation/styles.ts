@@ -1,21 +1,16 @@
-const styles = {
+export default {
   navigation:
-    "flex  items-center h-[52px] bg-white drop-shadow-[2px_1px_7px_rgba(0,0,0,0.08)] drop-shadow-[0_2px_1px_-1px_rgba(0,0,0,0.04)] drop-shadow-[0_1px_3px_rgba(0,0,0,0.12)] rounded-md ",
-  button(direction: "left" | "right") {
-    return `relative inline-flex items-center rounded-l-md bg-white pl-[23px] pr-[31px]  text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 ${
-      direction === "left" ? "rounded-l-md" : "rounded-r-md"
-    }`;
-  },
-  buttonRight:
-    "relative inline-flex items-center rounded-r-md  bg-white pl-[23px] pr-[31px]  text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20",
-  pageNumberContainer: "flex-row flex px-[50px]",
+    "flex  items-center h-[52px] w-full min-w-min my-[17px] xl:mt-[41px] xl:mb-[35px] xl:w-auto bg-white shadow-3xl rounded-[10.4px] ",
+  button:
+    "relative inline-flex w-full justify-center items-center pl-[23px] pr-[31px]",
+  pageNumberContainer: "flex-row flex px-[50px] h-full",
   pageNumberLink(isActive: boolean) {
     return `flex justify-center items-center h-full w-[31px] font-bold text-[20.8px] active:text-[#5876C5] ${
-      isActive ? "text-[#55699E]" : "text-[#70778B]"
+      isActive
+        ? "text-[#5876C5] border-y-[2.6px] border-solid border-b-[#5876C5] border-t-[#ffffff]"
+        : "text-[#70778B] border-y-[2.6px] border-y-[#ffffff]"
     }`;
   },
   separator:
     "border-r-[1.3px] w-[1.3px] border-solid border-[#DEE3EF] h-[31.2px]",
 };
-
-export default styles;

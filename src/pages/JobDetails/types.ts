@@ -1,10 +1,10 @@
 import { RouteComponentProps } from "react-router-dom";
 import { JobData } from "../../components/JobBar/types";
 
-export interface JobBoardProps extends RouteComponentProps {
+export interface JobDetailsProps extends RouteComponentProps {
   jobList: JobData[];
   match: {
-    params: { pageNumber: number };
+    params: { jobId: string };
     isExact: boolean;
     path: string;
     url: string;

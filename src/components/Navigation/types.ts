@@ -1,7 +1,7 @@
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, ReactComponentElement } from "react";
+import { match, RouteComponentProps } from "react-router-dom";
 
-export interface NavigationProps {
+export interface NavigationProps extends RouteComponentProps {
   pagesCount: number;
-  navHandler: MouseEventHandler<HTMLButtonElement>;
-  activePage: number;
+  activePageNumber: number;
 }
