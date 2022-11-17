@@ -47,24 +47,22 @@ function Navigation({ pagesCount, activePageNumber }: NavigationProps) {
 
   return (
     <nav className={styles.navigation}>
-      <button className={styles.button}>
-        <Link to={`/job-board/page/${switchToPage("back", activePageNumber)}`}>
+      <Link to={`/job-board/page/${switchToPage("back", activePageNumber)}`}>
+        <button className={styles.button("left")}>
           <img src={chevronLeft}></img>
-        </Link>
-      </button>
+        </button>
+      </Link>
 
       <div className={styles.separator}></div>
       <div className={styles.pageNumberContainer}>
         {renderPageNumberLinks(pagesCount)}
       </div>
       <div className={styles.separator}></div>
-      <button className={styles.button}>
-        <Link
-          to={`/job-board/page/${switchToPage("forward", activePageNumber)}`}
-        >
+      <Link to={`/job-board/page/${switchToPage("forward", activePageNumber)}`}>
+        <button className={styles.button("right")}>
           <img src={chevronRight}></img>
-        </Link>
-      </button>
+        </button>
+      </Link>
     </nav>
   );
 }

@@ -1,8 +1,13 @@
 export default {
   navigation:
-    "flex  items-center h-[52px] w-full min-w-min my-[17px] xl:mt-[41px] xl:mb-[35px] xl:w-auto bg-white shadow-3xl rounded-[10.4px] ",
-  button:
-    "relative inline-flex w-full justify-center items-center pl-[23px] pr-[31px]",
+    "flex  items-center justify-center h-[52px] w-full min-w-min my-[17px] xl:mt-[41px] xl:mb-[35px] xl:w-auto bg-white shadow-3xl rounded-[10.4px] ",
+  button(direction: "left" | "right") {
+    const button: string =
+      "relative flex justify-center items-center py-[15px]";
+    return direction === "left"
+      ? `${button} pl-[23px] pr-[31px]`
+      : `${button} pr-[23px] pl-[31px]`;
+  },
   pageNumberContainer: "flex-row flex px-[50px] h-full",
   pageNumberLink(isActive: boolean) {
     return `flex justify-center items-center h-full w-[31px] font-bold text-[20.8px] active:text-[#5876C5] ${

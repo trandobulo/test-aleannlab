@@ -1,5 +1,7 @@
 export default {
-  button(type: "button" | "optionEmployment" | "optionBenefits") {
+  button(
+    type: "button" | "optionEmployment" | "optionBenefits" | "buttonReturn"
+  ) {
     const baseLayer: string =
       "flex items-center justify-center rounded-[8px] mr-[8px]";
     const buttonLayer: string =
@@ -8,6 +10,8 @@ export default {
       "bg-[#a1b1db32] border-solid border border-[#55699e30] font-bold text-[16px] text-[#55699E] w-[222px] h-[49px] first-letter:uppercase";
     const optionBenefitsLayer: string =
       "bg-[#ffcf0030] border-solid border border-[#ffcf00] font-bold text-[16px] text-[#988B49] w-[222px] h-[50px] first-letter:uppercase";
+    const buttonReturnLayer: string =
+      "bg-[#384654]/[.14] relative left-[-93px] text-[12px] font-[600] text-[#55699E] w-[213px] h-[50px] hidden xl:flex uppercase";
 
     switch (type) {
       case "optionBenefits":
@@ -16,8 +20,13 @@ export default {
       case "optionEmployment":
         return `${baseLayer} ${optionEmploymentLayer}`;
         break;
+      case "buttonReturn":
+        return `${baseLayer} ${buttonReturnLayer}`;
+        break;
       default:
         return `${baseLayer} ${buttonLayer}`;
     }
   },
+
+  buttonIcon: "mr-[19px]",
 };

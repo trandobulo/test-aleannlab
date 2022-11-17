@@ -1,4 +1,4 @@
 export interface ButtonProps {
   value: string;
-  type: "button" | "optionEmployment" | "optionBenefits";
+  type: "button" | "optionEmployment" | "optionBenefits" | "buttonReturn";
 }

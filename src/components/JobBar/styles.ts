@@ -12,12 +12,13 @@ export default {
   shortDescriptionlocationIcon: "flex items-center w-[13px] h-[18px] mr-2",
   shortDescriptionLocation:
     "flex w-full h-[25px] font-normal  text-[16px] text-[#878D9D] tracking-[0.23619pxpx] leading-[25px] mb-[11px] xl:mb-2",
-  options: "flex flex-row w-full xl:h-[116px] xl:items-center",
+  options:
+    "flex flex-row w-full xl:h-[116px] xl:items-center pb-[14px] xl:pb-0",
   rateContainer:
-    "flex justify-start pl-[84px] xl:p-0 xl:mx-[32px] w-[50%] xl:w-[96px]",
+    "flex justify-start items-center pl-[84px] xl:p-0 xl:mx-[32px] w-[50%] xl:w-[96px]",
   rateIcon: " h-[10px] w-[10px] xl:w-[18px] xl:h-[19px]",
   optionsFrame:
-    "flex flex-col items-end justify-between w-[50%] h-full pb-[17px] xl:pb-0 xl:w-[138px] text-[#878D9D]",
+    "flex flex-col items-end justify-between w-[50%] h-full xl:pb-0 xl:w-[138px] text-[#878D9D]",
   bookmarkFrameIconContainer:
     "flex justify-center hidden xl:block  items-center w-[32px] h-[32px]",
   bookmarkFramePosted:
