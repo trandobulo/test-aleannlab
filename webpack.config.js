@@ -4,8 +4,15 @@ const path = require("path");
 const config = {
   entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "public"),
+    },
+    compress: true,
+    port: 9000,
   },
   module: {
     rules: [

@@ -9,22 +9,24 @@ import location from "../../svg/location.svg";
 import styles from "./styles";
 
 function JobBar({ jobData }: JobBarProps): JSX.Element {
-  const renderRate = () => {
-    return [star, star, star, star, star].map((item, index) => {
-      return <img className={styles.rateIcon} src={item} key={index}></img>;
-    });
+  const renderRate = (): JSX.Element[] => {
+    return Array(5)
+      .fill(star, 0)
+      .map((item, index) => (
+        <img className={styles.rateIcon} src={item} key={index}></img>
+      ));
   };
 
   return (
     <div className={styles.jobBar}>
       <div className={styles.content}>
         <div className={styles.contentImageContainer}>
-          <img src={jobData.pictures[0]}></img>
+          {jobData.pictures[0] && <img src={jobData.pictures[0]}></img>}
         </div>
         <div className={styles.shortDescription}>
-          <h2 className={styles.shortDescriptionTitle}>
-            <Link to={`/job-details/id/${jobData.id}`}>{jobData.title}</Link>
-          </h2>
+          <h1 className={styles.shortDescriptionTitle}>
+            <Link to={`/jobs/${jobData.id}`}>{jobData.title}</Link>
+          </h1>
           <p className={styles.shortDescriptionName}>{jobData.name}</p>
           <div className={styles.shortDescriptionLocation}>
             <div className={styles.shortDescriptionlocationIcon}>

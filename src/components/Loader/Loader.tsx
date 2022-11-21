@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./styles";
+import loader from "../../svg/loader.svg";
 
 const Loader = (): JSX.Element => {
+  useEffect(() => {
+    const loadTimer = setTimeout(() => {
+      alert(
+        "Ups, there is a problem while loading data from server. Try to reload page or repeat your request later "
+      );
+    }, 5000);
+    return () => {
+      clearTimeout(loadTimer);
+    };
+  });
+
   return (
     <div className={styles.loaderContainer}>
-      <svg
-        fill="none"
-        className={styles.loader}
-        viewBox="0 0 32 32"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          clip-rule="evenodd"
-          d="M15.165 8.53a.5.5 0 01-.404.58A7 7 0 1023 16a.5.5 0 011 0 8 8 0 11-9.416-7.874.5.5 0 01.58.404z"
-          fill="currentColor"
-          fill-rule="evenodd"
-        />
-      </svg>
+      <img className={styles.loader} src={loader} />
       <div>Loading ...</div>
     </div>
   );

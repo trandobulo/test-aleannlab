@@ -1,18 +1,20 @@
 import React from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import mapMarker from "../../svg/mapMarker.svg";
+import { MapProps } from "./types";
 
 const containerStyle = {
   width: "402px",
   height: "246px",
 };
 
-function Map({ position }) {
+function Map({ position }: MapProps): JSX.Element {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyAStheAJ4IQreayh7FXzxE3ZRLvaJeTm9E",
   });
 
-  const styles = [
+  const styles: google.maps.MapTypeStyle[] = [
     { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
     { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
     { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
@@ -93,21 +95,28 @@ function Map({ position }) {
     },
   ];
 
-  return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={{ lat: position.lat, lng: position.long }}
-      zoom={10}
-      options={{
-        disableDefaultUI: true,
-        gestureHandling: "none",
-        styles: styles,
-      }}
-    >
-      <Marker position={{ lat: position.lat, lng: position.long }} />
-    </GoogleMap>
-  ) : (
-    <></>
+  return (
+    <>
+      {isLoaded && (
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={position}
+          zoom={12}
+          options={{
+            disableDefaultUI: true,
+            gestureHandling: "none",
+            styles: styles,
+          }}
+        >
+          <Marker
+            position={position}
+            icon={{
+              url: mapMarker,
+            }}
+          />
+        </GoogleMap>
+      )}
+    </>
   );
 }
 

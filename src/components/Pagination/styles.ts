@@ -13,7 +13,7 @@ export default {
     return `flex justify-center items-center h-full w-[31px] font-bold text-[20.8px] active:text-[#5876C5] ${
       isActive
         ? "text-[#5876C5] border-y-[2.6px] border-solid border-b-[#5876C5] border-t-[#ffffff]"
-        : "text-[#70778B] border-y-[2.6px] border-y-[#ffffff]"
+        : "text-[#70778B] border-y-[2.6px] border-solid border-y-[#ffffff]"
     }`;
   },
   separator:

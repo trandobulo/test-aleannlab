@@ -1,25 +1,19 @@
 import React from "react";
 import styles from "./styles";
-import { NavigationProps } from "./types";
+import { PaginationProps } from "./types";
 import { Link, withRouter } from "react-router-dom";
 import chevronLeft from "../../svg/chevron-left.svg";
 import chevronRight from "../../svg/chevron-right.svg";
 
-function Navigation({ pagesCount, activePageNumber }: NavigationProps) {
-  const renderPageNumberLinks = (pagesCount: number) => {
-    const arr: number[] = [];
+function Pagination({ jobList, activePageNumber, pageSize }: PaginationProps) {
+  const pagesCount: number = Math.ceil(jobList.length / pageSize);
 
-    for (let i: number = 1; i <= pagesCount; i++) {
-      arr.push(i);
-    }
-
-    return arr.map((item: number) => {
+  const renderPageNumberLinks = (pagesCount: number): JSX.Element[] => {
+    return [...new Array(pagesCount)].map((item: number, index: number) => {
+      item = index + 1;
       return (
-        <Link to={`/job-board/page/${item}`}>
-          <button
-            className={styles.pageNumberLink(item === activePageNumber)}
-            key={item}
-          >
+        <Link to={`/jobs?page=${item}`} key={item}>
+          <button className={styles.pageNumberLink(item === activePageNumber)}>
             {item}
           </button>
         </Link>
@@ -47,7 +41,7 @@ function Navigation({ pagesCount, activePageNumber }: NavigationProps) {
 
   return (
     <nav className={styles.navigation}>
-      <Link to={`/job-board/page/${switchToPage("back", activePageNumber)}`}>
+      <Link to={`/jobs?page=${switchToPage("back", activePageNumber)}`}>
         <button className={styles.button("left")}>
           <img src={chevronLeft}></img>
         </button>
@@ -58,7 +52,7 @@ function Navigation({ pagesCount, activePageNumber }: NavigationProps) {
         {renderPageNumberLinks(pagesCount)}
       </div>
       <div className={styles.separator}></div>
-      <Link to={`/job-board/page/${switchToPage("forward", activePageNumber)}`}>
+      <Link to={`/jobs?page=${switchToPage("forward", activePageNumber)}`}>
         <button className={styles.button("right")}>
           <img src={chevronRight}></img>
         </button>
@@ -67,4 +61,4 @@ function Navigation({ pagesCount, activePageNumber }: NavigationProps) {
   );
 }
 
-export default withRouter<NavigationProps, any>(Navigation);
+export default withRouter<PaginationProps, any>(Pagination);

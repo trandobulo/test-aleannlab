@@ -5,15 +5,15 @@ import { JobData } from "../../components/JobBar/types";
 import Map from "../../components/Map/Map";
 import Button from "../../components/Button/Button";
 import TimeAgo from "react-timeago";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import share from "../../svg/share.svg";
 import bookmark from "../../svg/bookmark.svg";
 import bookmarkStar from "../../svg/bookmarkStar.svg";
 import location from "../../svg/location.svg";
 import styles from "./styles";
 
-function JobDetails({ match, jobList }: JobDetailsProps) {
-  const getJobData = (jobList: JobData[], id: string) => {
+function JobDetails({ match, jobList }: JobDetailsProps): JSX.Element {
+  const getJobData = (jobList: JobData[], id: string): JobData => {
     const jobData: JobData | undefined = jobList.find(
       (item: JobData) => item.id === id
     );
@@ -25,13 +25,66 @@ function JobDetails({ match, jobList }: JobDetailsProps) {
     }
   };
 
-  const jobData = getJobData(jobList, match.params.jobId);
+  const jobData: JobData = getJobData(jobList, match.params.jobId);
 
-  const changeBookmarkIcon = (windowWidth: number) => {
-    return windowWidth < 1280 ? bookmarkStar : bookmark;
+  const changeBookmarkIcon = (windowWidth: number): string => {
+    return windowWidth < 1265 ? bookmarkStar : bookmark;
   };
 
-  const renderImages = (pictures: string[]) => {
+  const renderJobDetailsHeader = (): JSX.Element => {
+    return (
+      <div className={styles.jobDetailsHeader}>
+        <h1 className={styles.title("static", useWindowWidth() < 1265)}>
+          job details
+        </h1>
+        <div className={styles.jobDetailsHeaderOptions}>
+          <div className={styles.bookmarkContainer}>
+            <img
+              className={styles.bookmarkIcon}
+              src={changeBookmarkIcon(useWindowWidth())}
+            ></img>
+            <p className={styles.bookmarkIconCaption}>save to my list</p>
+          </div>
+          <div className={styles.shareContainer}>
+            <img className={styles.shareIcon} src={share}></img>
+            <p className={styles.shareIconCaption}>share</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderDescription = (): JSX.Element => {
+    const salary = jobData.salary.replace(/k/g, " 000").replace(/\-/, "—");
+
+    return (
+      <>
+        <div className={styles.jobTitleContainer}>
+          <h4 className={styles.jobTitle}>{jobData.title}</h4>
+          {useWindowWidth() > 1265 && (
+            <div className={styles.salary}>
+              <p className={styles.titleSmall}>brutto, per year</p>
+              <p>{salary}</p>
+            </div>
+          )}
+        </div>
+        <div className={styles.salaryContainer}>
+          <div className={styles.timeAgo}>
+            posted <TimeAgo prefix="" date={jobData.updatedAt} />
+          </div>
+          {useWindowWidth() < 1265 && (
+            <div className={styles.salary}>
+              <p className={styles.titleSmall}>brutto, per year</p>
+              <p>{salary}</p>
+            </div>
+          )}
+        </div>
+        <p className={styles.description}>{jobData.description}</p>
+      </>
+    );
+  };
+
+  const renderImages = (pictures: string[]): JSX.Element => {
     return (
       <div className={styles.optionContainer}>
         {pictures.map((item, index) => {
@@ -42,11 +95,11 @@ function JobDetails({ match, jobList }: JobDetailsProps) {
   };
 
   const renderOptions = (
-    type: "optionEmployment" | "optionBenefits",
+    type: "buttonOptionBlue" | "buttonOptionYellow",
     items: string[]
-  ) => {
+  ): JSX.Element => {
     const caption: string =
-      type === "optionEmployment" ? "employment options" : "benefits";
+      type === "buttonOptionBlue" ? "employment options" : "benefits";
     return (
       <>
         <h5 className={styles.titleSmall}>{caption}</h5>
@@ -63,54 +116,8 @@ function JobDetails({ match, jobList }: JobDetailsProps) {
     );
   };
 
-  return (
-    <div className={styles.jobDetails}>
-      <div className={styles.jobDetailsColumn}>
-        <div className={styles.jobDetailsHeader}>
-          <h2 className={styles.title("normal")}>job details</h2>
-          <div className={styles.jobDetailsHeaderOptions}>
-            <div className={styles.bookmarkContainer}>
-              <img
-                className={styles.bookmarkIcon}
-                src={changeBookmarkIcon(useWindowWidth())}
-              ></img>
-              <p className={styles.bookmarkIconCaption}>save to my list</p>
-            </div>
-            <div className={styles.shareContainer}>
-              <img className={styles.shareIcon} src={share}></img>
-              <p className={styles.shareIconCaption}>share</p>
-            </div>
-          </div>
-        </div>
-        <div className={styles.jobDescription}>
-          <h4 className={styles.jobTitle}>{jobData.title}</h4>
-          <div className={styles.salaryContainer}>
-            <div className={styles.timeAgo}>
-              posted <TimeAgo prefix="" date={jobData.updatedAt} />
-            </div>
-            <div className={styles.salary}>
-              <p className={styles.titleSmall}>brutto, per year</p>
-              <p>{jobData.salary}</p>
-            </div>
-          </div>
-          <p className={styles.description}>{jobData.description}</p>
-        </div>
-        <div className={styles.buttonContainer}>
-          <Button type="button" value="apply now" />
-        </div>
-        <div className={styles.infoBlock}>
-          <h2 className={styles.title("normal")}>attached pictures</h2>
-          {renderImages(jobData.pictures)}
-        </div>
-
-        <div className={styles.infoBlock}>
-          <h2 className={styles.title("normal")}>additional info</h2>
-          {renderOptions("optionEmployment", jobData.employment_type)}
-          {renderOptions("optionBenefits", jobData.benefits)}
-        </div>
-        <Button type="buttonReturn" value="return to job board" />
-      </div>
-      <h2 className={styles.title("hidable")}>contacts</h2>
+  const renderMap = (): JSX.Element => {
+    return (
       <div className={styles.mapContainer}>
         <div className={styles.mapInfoBlock}>
           <div className={styles.mapInfo}>
@@ -122,15 +129,46 @@ function JobDetails({ match, jobList }: JobDetailsProps) {
             <p className={styles.mapInfoInfoContacts}>{jobData.phone}</p>
             <p className={styles.mapInfoInfoContacts}>{jobData.email}</p>
           </div>
-          <div className={styles.backgroundCircle}></div>
+          {useWindowWidth() > 1265 && (
+            <div className={styles.backgroundCircle}></div>
+          )}
         </div>
         <Map
           position={{
             lat: Number(jobData.location.lat),
-            long: Number(jobData.location.long),
+            lng: Number(jobData.location.long),
           }}
         />
       </div>
+    );
+  };
+
+  return (
+    <div className={styles.jobDetails}>
+      <div className={styles.jobDetailsColumn}>
+        {renderJobDetailsHeader()}
+        <div className={styles.buttonContainer("hidable")}>
+          <Button type="button" value="apply now" />
+        </div>
+        <div className={styles.descriptionContainer}>{renderDescription()}</div>
+        <div className={styles.buttonContainer("static")}>
+          <Button type="button" value="apply now" />
+        </div>
+        <div className={styles.infoBlock}>
+          <h1 className={styles.title("static")}>additional info</h1>
+          {renderOptions("buttonOptionBlue", jobData.employment_type)}
+          {renderOptions("buttonOptionYellow", jobData.benefits)}
+        </div>
+        <div className={styles.infoBlock}>
+          <h1 className={styles.title("static")}>attached pictures</h1>
+          {renderImages(jobData.pictures)}
+        </div>
+        <Link to="/jobs?page=1">
+          <Button type="buttonArrow" value="return to job board" />
+        </Link>
+      </div>
+      <h1 className={styles.title("hidable")}>contacts</h1>
+      {renderMap()}
     </div>
   );
 }
