@@ -5,6 +5,8 @@ import Loader from "../Loader/Loader";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { JobListState, IsLoadingState } from "./types";
 
+const PAGE_SIZE: number = 10;
+
 function App(): JSX.Element {
   const [jobList, setJobList]: JobListState = useState([]);
   const [isLoading, setIsLoading]: IsLoadingState = useState(true);
@@ -49,7 +51,7 @@ function App(): JSX.Element {
             <JobBoard
               jobList={jobList}
               page={query.get("page")}
-              pageSize={10}
+              pageSize={PAGE_SIZE}
             />
           )}
           {isLoading && <Loader />}

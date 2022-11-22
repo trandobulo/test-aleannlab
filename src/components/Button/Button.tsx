@@ -5,12 +5,12 @@ import { ButtonProps } from "./types";
 
 function Button({ type, value }: ButtonProps): JSX.Element {
   return (
-    <div className={styles.button(type)}>
+    <button className={styles.button(type)}>
       {type === "buttonArrow" && (
         <img className={styles.buttonIcon} src={arrow}></img>
       )}
       <p>{value}</p>
-    </div>
+    </button>
   );
 }
 
