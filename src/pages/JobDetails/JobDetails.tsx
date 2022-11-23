@@ -4,6 +4,7 @@ import { JobDetailsProps } from "./types";
 import { JobData } from "../../components/JobBar/types";
 import Map from "../../components/Map/Map";
 import Button from "../../components/Button/Button";
+import Option from "../../components/Option/Option";
 import TimeAgo from "react-timeago";
 import { withRouter, Link } from "react-router-dom";
 import share from "../../svg/share.svg";
@@ -95,11 +96,11 @@ function JobDetails({ match, jobList }: JobDetailsProps): JSX.Element {
   };
 
   const renderOptions = (
-    type: "buttonOptionBlue" | "buttonOptionYellow",
+    type: "optionBlue" | "optionYellow",
     items: string[]
   ): JSX.Element => {
     const caption: string =
-      type === "buttonOptionBlue" ? "employment options" : "benefits";
+      type === "optionBlue" ? "employment options" : "benefits";
     return (
       <>
         <h5 className={styles.titleSmall}>{caption}</h5>
@@ -107,7 +108,7 @@ function JobDetails({ match, jobList }: JobDetailsProps): JSX.Element {
           {items.map((item, index) => {
             return (
               <React.Fragment key={index}>
-                <Button type={type} value={item} />
+                <Option type={type} value={item} />
               </React.Fragment>
             );
           })}
@@ -156,8 +157,8 @@ function JobDetails({ match, jobList }: JobDetailsProps): JSX.Element {
         </div>
         <div className={styles.infoBlock}>
           <h1 className={styles.title("static")}>additional info</h1>
-          {renderOptions("buttonOptionBlue", jobData.employment_type)}
-          {renderOptions("buttonOptionYellow", jobData.benefits)}
+          {renderOptions("optionBlue", jobData.employment_type)}
+          {renderOptions("optionYellow", jobData.benefits)}
         </div>
         <div className={styles.infoBlock}>
           <h1 className={styles.title("static")}>attached pictures</h1>
