@@ -57,7 +57,6 @@ const config = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
-  historyApiFallback: true,
 };
 
 module.exports = config;
