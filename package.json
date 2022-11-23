@@ -2,7 +2,7 @@
   "name": "test-aleannlab",
   "version": "1.0.0",
   "description": "test assignment",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production"
