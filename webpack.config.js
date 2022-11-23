@@ -8,7 +8,22 @@ const config = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      templateContent: `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Aleannlab test assignment</title>
+        </head>
+        <body>
+          <div id="root"></div>
+          <script src="/bundle.js"></script>
+        </body>
+      </html>      
+      `,
+    }),
+  ],
   devServer: {
     static: {
       directory: path.join(__dirname, "public"),
