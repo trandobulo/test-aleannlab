@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 const config = {
@@ -7,6 +8,7 @@ const config = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
+  plugins: [new HtmlWebpackPlugin()],
   devServer: {
     static: {
       directory: path.join(__dirname, "public"),
