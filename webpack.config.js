@@ -10,18 +10,8 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      templateContent: `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Aleannlab test assignment</title>
-        </head>
-        <body>
-          <div id="root"></div>
-          <script src="/bundle.js"></script>
-        </body>
-      </html>      
-      `,
+      filename: "index.html",
+      template: "./public/index.html",
     }),
   ],
   devServer: {
@@ -67,6 +57,7 @@ const config = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
+  historyApiFallback: true,
 };
 
 module.exports = config;
